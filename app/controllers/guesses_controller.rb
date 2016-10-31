@@ -2,17 +2,20 @@ class GuessesController < ActionController::Base
 
 def index
 
+  #insert @first, @second, @third into database
   g=Guess.new
-  
+  g.first_num = params["first_number"]
+  g.second_num = params["second_number"]
+  g.third_num = params["third_number"]
+  g.save
+
   @list=Guess.all
-  @first=params["first_number"]
-  @second = params["second_number"]
-  @third = params["third_number"]
 
   render ("guesses/index.html.erb")
 end
 
 def answer
+  @ans = params["rule"]
   render("guesses/answer.html.erb")
 end
 
